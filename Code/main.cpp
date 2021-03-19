@@ -1,6 +1,7 @@
 #include "list.h"
 
-void createPoints(Point* points[], double pWidth, double pHeight);
+void createPointsDerechos(Point* points[], double pWidth, double pHeight, double pInicioX, double pInicioY);
+void createPointsTorcidos(Point* nextPoints[], double pWidth, double pHeight, double inicioX, double inicioY, double auxInicioX, double auxInicioY, double auxAncho, double auxAlto);
 void draw(double pWidth, double pHeight, List* pLines);
 
 int main(){
@@ -17,18 +18,50 @@ int main(){
 void draw(double pWidth, double pHeight, List* pLines){
     Point* initialPoints[4];
     Point* nextPoints[4];
-    createPoints(initialPoints, pWidth, pHeight);
+    double inicioX = 0;
+    double inicioY = 0;
 
-    // Desarrollo aun no escrito en codigo
+    for(int i=0; i<10; i++){
+        int distX = pWidth-inicioX;
+		int distY = pHeight-inicioY;
+		int reduccionX = (distX*4)/100;
+		int reduccionY = (distY*4)/100;
 
-    pLines->add(initialPoints[0],initialPoints[1]);
+        createPointsDerechos(initialPoints, pWidth, pHeight, inicioX, inicioY);
+        for(int i=0;i<3;i++){
+            pLines->add(initialPoints[i],initialPoints[i+1]);            
+        }
+        pLines->add(initialPoints[4],initialPoints[1]);
+
+        int auxInicioX = inicioX + reduccionX;
+		int auxInicioY = inicioY + reduccionY;
+		int auxAncho = pWidth - reduccionX;
+		int auxAlto = pHeight - reduccionY;
+
+        createPointsTorcidos(nextPoints, pWidth, pHeight, inicioX, inicioY, auxInicioX, auxInicioY, auxAncho, auxAlto);
+        for(int i=0;i<3;i++){
+            pLines->add(nextPoints[i],nextPoints[i+1]);            
+        }
+        pLines->add(nextPoints[4],nextPoints[1]);
+
+        inicioX = auxInicioX;
+		inicioY = auxInicioY;
+	    pWidth = auxAncho;
+		pHeight = auxAlto;
+    }
 }
 
 
-
-void createPoints(Point* points[], double pWidth, double pHeight){
-    points[0] = new Point(0,0);
-    points[1] = new Point(0,pHeight);
+void createPointsDerechos(Point* points[], double pWidth, double pHeight, double pInicioX, double pInicioY){
+    points[0] = new Point(pInicioX,pInicioY);
+    points[1] = new Point(pInicioX,pHeight);
     points[2] = new Point(pWidth,pHeight);
-    points[3] = new Point(pWidth,0);
+    points[3] = new Point(pWidth,pInicioY);
+}
+
+void createPointsTorcidos(Point* points[], double pWidth, double pHeight, double inicioX, double inicioY, double auxInicioX, double auxInicioY, double auxAncho, double auxAlto){
+    points[0] = new Point(auxInicioX,inicioY);
+    points[1] = new Point(inicioX,auxAlto);
+    points[2] = new Point(auxAncho,pHeight);
+    points[3] = new Point(pWidth,auxInicioY);
 }
