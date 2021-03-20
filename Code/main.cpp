@@ -26,12 +26,45 @@ void draw(double pWidth, double pHeight, List* pLines){
 		int distY = pHeight-inicioY;
 		int reduccionX = (distX*4)/100;
 		int reduccionY = (distY*4)/100;
+		int divRellenoX = (reduccionX*25)/100;
+		int divRellenoY = (reduccionY*25)/100;
 
         createPointsDerechos(initialPoints, pWidth, pHeight, inicioX, inicioY);
         for(int i=0;i<3;i++){
-            pLines->add(initialPoints[i],initialPoints[i+1]);            
+            pLines->add(initialPoints[i],initialPoints[i+1]);
+			//Agrega el relleno de este cuadro
+			if(i%2 == 0){
+				(initialPoints[i+1])->y+=(divRellenoY);
+				pLines->add(initialPoints[i], initialPoints[i+1]);
+				(initialPoints[i+1])->y+=(divRellenoY);
+				pLines->add(initialPoints[i], initialPoints[i+1];
+				(initialPoints[i+1])->y+=(divRellenoY);
+				pLines->add(initialPoints[i], initialPoints[i+1]);
+				(initialPoints[i+1])->y+=(divRellenoY);
+				pLines->add(initialPoints[i], initialPoints[i+1]);
+				(initialPoints[i+1])->y-=(4*divRellenoY);
+			}else{
+				(initialPoints[i+1])->x+=(divRellenoX);
+				pLines->add(initialPoints[i], initialPoints[i+1]);
+				(initialPoints[i+1])->x+=(divRellenoX);
+				pLines->add(initialPoints[i], initialPoints[i+1]);
+				(initialPoints[i+1])->x+=(divRellenoX);
+				pLines->add(initialPoints[i], initialPoints[i+1]);
+				(initialPoints[i+1])->x+=(divRellenoX);
+				pLines->add(initialPoints[i], initialPoints[i+1]);
+				(initialPoints[i+1])->x-=(4*divRellenoX);
+			}
         }
         pLines->add(initialPoints[4],initialPoints[1]);
+        (initialPoints[1])->x+=(divRellenoX);
+        pLines->add(initialPoints[4], initialPoints[1]);
+		(initialPoints[1])->x+=(divRellenoX);
+		pLines->add(initialPoints[4], initialPoints[1]);
+		(initialPoints[1])->x+=(divRellenoX);
+		pLines->add(initialPoints[4], initialPoints[1]);
+		(initialPoints[1])->x+=(divRellenoX);
+		pLines->add(initialPoints[4], initialPoints[1]);
+		(initialPoints[1])->x-=(4*divRellenoX);
 
         int auxInicioX = inicioX + reduccionX;
 		int auxInicioY = inicioY + reduccionY;
@@ -40,9 +73,12 @@ void draw(double pWidth, double pHeight, List* pLines){
 
         createPointsTorcidos(nextPoints, pWidth, pHeight, inicioX, inicioY, auxInicioX, auxInicioY, auxAncho, auxAlto);
         for(int i=0;i<3;i++){
-            pLines->add(nextPoints[i],nextPoints[i+1]);            
+            pLines->add(nextPoints[i],nextPoints[i+1]);
+			//Agrega el relleno de este cuadro
+			          
         }
         pLines->add(nextPoints[4],nextPoints[1]);
+        
 
         inicioX = auxInicioX;
 		inicioY = auxInicioY;
