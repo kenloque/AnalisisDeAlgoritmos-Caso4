@@ -15,7 +15,7 @@ int main(){
     return 0;
 }
 
-void draw(double pWidth, double pHeight, List* pLines){
+void draw(double pWidth, double pHeight, List* pLines){													//	n + 10, repeticion de cuadros
     Point* initialPoints[4];
     Point* nextPoints[4];
     double inicioX = 0;															//--> 1
