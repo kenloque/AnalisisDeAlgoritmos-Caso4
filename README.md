@@ -9,7 +9,7 @@ El algoritmo funciona sobre un ciclo en el cual se crean y se guardan las coorde
 ## F(n)
 Donde n=3 por el for interno...
 
-El f(n) = 3 + n(19 + 6 + (102*3) + 41 + 18 + 8*3 + 8)
+El f(n) = 3 + n(19 + 6 + (102 * 3) + 41 + 18 + 8 * 3 + 8)
    f(n) = 3 + n(422)
    f(n) = 422n + 3
 
